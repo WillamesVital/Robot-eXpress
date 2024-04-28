@@ -96,3 +96,53 @@ Não deve cadastrar com senha muito curta
 
         Alert shoudl be    expected_text=Informe uma senha com pelo menos 6 digitos        
     END
+    
+Não deve cadastrar com senha de 1 digito
+
+    [Tags]    short_pass
+    [Template]
+    Short password    1
+
+Não deve cadastrar com senha de 2 digitos
+
+    [Tags]    short_pass
+    [Template]
+    Short password    12
+
+Não deve cadastrar com senha de 3 digitos
+
+    [Tags]    short_pass
+    [Template]
+    Short password    123
+
+Não deve cadastrar com senha de 4 digitos
+
+    [Tags]    short_pass
+    [Template]
+    Short password    1234
+
+Não deve cadastrar com senha de 5 digitos
+
+    [Tags]    short_pass
+    [Template]
+    Short password    12345
+
+
+*** Keywords ***
+
+Short password
+    [Arguments]    ${short_pass}
+     
+    ${user}     Create Dictionary
+    ...    name=Test User    
+    ...    email=test@user.com  
+    ...    password=${short_pass}
+
+    Remove user from database    ${user}[email]
+    Insert user from database    ${user}
+
+    Go to signup page
+
+    Submit signup form    ${user}
+
+    Alert shoudl be    expected_text=Informe uma senha com pelo menos 6 digitos

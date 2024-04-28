@@ -1,6 +1,6 @@
 *** Settings ***
 
-Resource    ../resources/base.robot
+Resource    ../resources/base.resource
 
 Documentation    online
 
